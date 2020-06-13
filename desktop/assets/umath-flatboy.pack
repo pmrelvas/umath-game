@@ -1,0 +1,12 @@
+
+umath-flatboy.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+umath-flatboy
+  rotate: false
+  xy: 1, 1
+  size: 144, 17
+  orig: 144, 17
+  offset: 0, 0
+  index: -1
