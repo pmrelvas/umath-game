@@ -45,7 +45,7 @@ public class Hud implements Disposable {
         lblTime = new Label("TEMPO", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         lblLevel = new Label("1-1", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         lblWorld = new Label("NIVEL", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        lblMario = new Label("MATEMATICA", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        lblMario = new Label("OPERACAO", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
         table.add(lblMario).expandX().padTop(10);
         table.add(lblWorld).expandX().padTop(10);
