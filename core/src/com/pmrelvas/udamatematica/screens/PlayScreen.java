@@ -46,9 +46,9 @@ public class PlayScreen implements Screen {
         hud = new Hud(game.batch);
 
         mapLoader = new TmxMapLoader();
-        map = mapLoader.load("scenario.tmx");
+        map = mapLoader.load("math_scenario.tmx");
         renderer = new OrthogonalTiledMapRenderer(map, 1/MathUGame.PPM);
-        gameCam.position.set(gamePort.getWorldHeight()/2, gamePort.getWorldHeight()/2, 0);
+        gameCam.position.set(0, gamePort.getWorldHeight()/2, 0);
 
         world = new World(new Vector2(0, -10), true);
         b2dr = new Box2DDebugRenderer();
