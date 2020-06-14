@@ -13,6 +13,7 @@ public abstract class InteractiveTileObject {
     protected TiledMap map;
     protected TiledMapTile tile;
     protected Rectangle bounds;
+    protected Fixture fixture;
 
     public InteractiveTileObject(World world, TiledMap map, Rectangle bounds) {
         this.world = world;
@@ -30,7 +31,9 @@ public abstract class InteractiveTileObject {
 
         shape.setAsBox(bounds.getWidth()/2/MathUGame.PPM, bounds.getHeight()/2/MathUGame.PPM);
         fdef.shape = shape;
-        body.createFixture(fdef);
+        fixture = body.createFixture(fdef);
     }
+
+    public abstract void onHeadHit();
 
 }

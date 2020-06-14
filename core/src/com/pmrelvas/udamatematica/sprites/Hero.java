@@ -3,6 +3,7 @@ package com.pmrelvas.udamatematica.sprites;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
 import com.pmrelvas.udamatematica.MathUGame;
@@ -53,7 +54,7 @@ public class Hero extends Sprite {
         heroJump = new Animation(0.1f, frames);
         frames.clear();
 
-        definePlayer();
+        defineHero();
 
         heroStand = new TextureRegion(getTexture(), 0, 0, 16, 20);
         setBounds(0, 0, PLAYER_SPRITE_WIDTH/MathUGame.PPM, PLAYER_SPRITE_HEIGHT/MathUGame.PPM);
@@ -109,7 +110,7 @@ public class Hero extends Sprite {
         return State.STANDING;
     }
 
-    public void definePlayer() {
+    public void defineHero() {
         BodyDef bdef = new BodyDef();
         bdef.position.set(32/ MathUGame.PPM, 32/MathUGame.PPM);
         bdef.type = BodyDef.BodyType.DynamicBody;
@@ -120,5 +121,13 @@ public class Hero extends Sprite {
         shape.setRadius(9/MathUGame.PPM);
         fdef.shape = shape;
         b2Body.createFixture(fdef);
+
+        EdgeShape head = new EdgeShape();
+        head.set(new Vector2(-2/MathUGame.PPM, 8/MathUGame.PPM), new Vector2(2/MathUGame.PPM, 8/MathUGame.PPM));
+        fdef.shape = head;
+        fdef.isSensor = true;
+
+        b2Body.createFixture(fdef).setUserData("head");
+
     }
 }

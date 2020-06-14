@@ -18,6 +18,7 @@ import com.pmrelvas.udamatematica.MathUGame;
 import com.pmrelvas.udamatematica.scenes.Hud;
 import com.pmrelvas.udamatematica.sprites.Hero;
 import com.pmrelvas.udamatematica.tools.B2WorldCreator;
+import com.pmrelvas.udamatematica.tools.WorldContactListener;
 
 public class PlayScreen implements Screen {
 
@@ -56,6 +57,8 @@ public class PlayScreen implements Screen {
         new B2WorldCreator(world, map);
 
         hero = new Hero(world, this);
+
+        world.setContactListener(new WorldContactListener());
     }
 
     public TextureAtlas getAtlas() {
