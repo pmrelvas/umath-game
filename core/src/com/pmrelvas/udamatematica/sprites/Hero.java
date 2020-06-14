@@ -119,6 +119,9 @@ public class Hero extends Sprite {
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
         shape.setRadius(9/MathUGame.PPM);
+        fdef.filter.categoryBits = MathUGame.HERO_BIT;
+        fdef.filter.maskBits = MathUGame.DEFAULT_BIT | MathUGame.RESULT_BOX_BIT | MathUGame.BRICK_BIT;
+
         fdef.shape = shape;
         b2Body.createFixture(fdef);
 
