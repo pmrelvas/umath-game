@@ -6,16 +6,20 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.*;
 import com.pmrelvas.udamatematica.MathUGame;
+import com.pmrelvas.udamatematica.scenes.Hud;
 import com.pmrelvas.udamatematica.sprites.Brick;
 import com.pmrelvas.udamatematica.sprites.ResultBox;
 
 public class B2WorldCreator {
-    
-    public B2WorldCreator(World world, TiledMap map) {
+
+    private final Hud hud;
+
+    public B2WorldCreator(World world, TiledMap map, Hud hud) {
         BodyDef bdef = new BodyDef();
         PolygonShape shape = new PolygonShape();
         FixtureDef fdef = new FixtureDef();
         Body body;
+        this.hud = hud;
 
         // create ground bodies/fixtures
         for (MapObject object : map.getLayers().get(2).getObjects().getByType(RectangleMapObject.class)) {
@@ -42,7 +46,7 @@ public class B2WorldCreator {
         for (MapObject object : map.getLayers().get(4).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
-            new ResultBox(world, map, rect);
+            new ResultBox(world, map, rect, hud);
         }
     }
 }

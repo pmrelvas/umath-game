@@ -4,6 +4,7 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.pmrelvas.udamatematica.MathUGame;
 
@@ -48,6 +49,11 @@ public abstract class InteractiveTileObject {
     public TiledMapTileLayer.Cell getCell() {
         TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get(1);
         return layer.getCell((int)(body.getPosition().x * MathUGame.PPM / TILE_SIZE_PX),
+                (int)(body.getPosition().y * MathUGame.PPM / TILE_SIZE_PX));
+    }
+
+    public Vector2 getCellPosition() {
+        return new Vector2((int)(body.getPosition().x * MathUGame.PPM / TILE_SIZE_PX),
                 (int)(body.getPosition().y * MathUGame.PPM / TILE_SIZE_PX));
     }
 

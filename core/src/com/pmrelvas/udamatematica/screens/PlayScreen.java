@@ -44,7 +44,7 @@ public class PlayScreen implements Screen {
         this.game = game;
         gameCam = new OrthographicCamera();
         gamePort = new FitViewport(MathUGame.V_WIDTH/MathUGame.PPM, MathUGame.V_HEIGHT/MathUGame.PPM, gameCam);
-        hud = new Hud(game.batch);
+        hud = new Hud(game.batch, game);
 
         mapLoader = new TmxMapLoader();
         map = mapLoader.load("math_scenario.tmx");
@@ -54,7 +54,7 @@ public class PlayScreen implements Screen {
         world = new World(new Vector2(0, -10), true);
         b2dr = new Box2DDebugRenderer();
 
-        new B2WorldCreator(world, map);
+        new B2WorldCreator(world, map, hud);
 
         hero = new Hero(world, this);
 
@@ -67,7 +67,7 @@ public class PlayScreen implements Screen {
 
     @Override
     public void show() {
-
+        this.game.levelEnded = false;
     }
 
     public void handleInput(float dt) {
@@ -75,10 +75,10 @@ public class PlayScreen implements Screen {
             hero.b2Body.applyLinearImpulse(new Vector2(0, 4f), hero.b2Body.getWorldCenter(), true);
         }
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && hero.b2Body.getLinearVelocity().x <= MAX_VELOCITY) {
-            hero.b2Body.applyLinearImpulse(new Vector2(0.1f, 0), hero.b2Body.getWorldCenter(), true);
+            hero.b2Body.applyLinearImpulse(new Vector2(0.06f, 0), hero.b2Body.getWorldCenter(), true);
         }
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && hero.b2Body.getLinearVelocity().x >= -MAX_VELOCITY) {
-            hero.b2Body.applyLinearImpulse(new Vector2(-0.1f, 0), hero.b2Body.getWorldCenter(), true);
+            hero.b2Body.applyLinearImpulse(new Vector2(-0.06f, 0), hero.b2Body.getWorldCenter(), true);
         }
     }
 
@@ -88,6 +88,7 @@ public class PlayScreen implements Screen {
         world.step(1/60f, 6, 2);
 
         hero.update(dt);
+        hud.update(dt);
 
         gameCam.update();
         renderer.setView(gameCam);
@@ -97,23 +98,25 @@ public class PlayScreen implements Screen {
     public void render(float delta) {
         update(delta);
 
-        // clear the screen game with blocks
-        Gdx.gl.glClearColor(0, 0, 0, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        if (!game.levelEnded) {
+            // clear the screen game with blocks
+            Gdx.gl.glClearColor(0, 0, 0, 1);
+            Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        renderer.render();
+            renderer.render();
 
-        // render our Box2DDebugLines
-        b2dr.render(world, gameCam.combined);
+            // render our Box2DDebugLines
+            b2dr.render(world, gameCam.combined);
 
-        game.batch.setProjectionMatrix(gameCam.combined);
-        game.batch.begin();
-        hero.draw(game.batch);
-        game.batch.end();
+            game.batch.setProjectionMatrix(gameCam.combined);
+            game.batch.begin();
+            hero.draw(game.batch);
+            game.batch.end();
 
-        // set our batch to draw what camera sees
-        game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
-        hud.stage.draw();
+            // set our batch to draw what camera sees
+            game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
+            hud.stage.draw();
+        }
     }
 
     @Override
