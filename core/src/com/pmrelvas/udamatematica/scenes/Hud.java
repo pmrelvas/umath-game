@@ -68,8 +68,6 @@ public class Hud implements Disposable {
 
     }
 
-
-
     private void initTopRowLabel() {
         Table table = new Table();
         table.top();
@@ -78,7 +76,7 @@ public class Hud implements Disposable {
         lblCountdown = new Label(String.format("%03d", worldTimer), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         lblOperation = new Label(calculations.getOperationStr(), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         lblTime = new Label("TEMPO", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        lblLevel = new Label("1-1", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        lblLevel = new Label("1-" + game.NUM_LEVELS, new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         lblWorld = new Label("NIVEL", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         lblMario = new Label("OPERACAO", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
@@ -140,6 +138,10 @@ public class Hud implements Disposable {
         lblAnswerB.setText(calculations.getResults().get(1));
         lblAnswerC.setText(calculations.getResults().get(2));
         lblAnswerD.setText(calculations.getResults().get(3));
+    }
+
+    public void setCurrentLevelLabel(int currentLevel) {
+        lblLevel.setText(String.format("%s-%s", currentLevel + 1, game.NUM_LEVELS));
     }
 
     @Override

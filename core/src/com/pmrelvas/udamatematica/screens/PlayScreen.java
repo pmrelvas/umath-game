@@ -67,7 +67,8 @@ public class PlayScreen implements Screen {
 
     @Override
     public void show() {
-        this.game.levelEnded = false;
+        game.levelEnded = false;
+        hud.setCurrentLevelLabel(game.getCurrentLevel());
     }
 
     public void handleInput(float dt) {

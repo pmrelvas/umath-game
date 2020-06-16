@@ -8,7 +8,6 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
@@ -44,7 +43,6 @@ public class MainMenuScreen implements Screen {
 
     private final MathUGame game;
 
-    private ShapeRenderer shapeRenderer;
     private Stage stage;
     private Viewport viewport;
 
@@ -54,7 +52,6 @@ public class MainMenuScreen implements Screen {
 
     public MainMenuScreen(MathUGame game) {
         this.game = game;
-        this.shapeRenderer = new ShapeRenderer();
         viewport = new FitViewport(MathUGame.V_WIDTH, MathUGame.V_HEIGHT, new OrthographicCamera());
         this.stage = new Stage(viewport);
     }
@@ -191,19 +188,6 @@ public class MainMenuScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.act(delta);
         stage.draw();
-        game.batch.begin();
-//        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-//        shapeRenderer.setColor(Color.BLACK);
-//        shapeRenderer.rect(LEVEL1_X, LEVEL1_Y, LEVEL_BOX_SIZE, LEVEL_BOX_SIZE);
-//        shapeRenderer.rect(LEVEL2_X, LEVEL2_Y, LEVEL_BOX_SIZE, LEVEL_BOX_SIZE);
-//        shapeRenderer.rect(LEVEL3_X, LEVEL3_Y, LEVEL_BOX_SIZE, LEVEL_BOX_SIZE);
-//        shapeRenderer.rect(LEVEL4_X, LEVEL4_Y, LEVEL_BOX_SIZE, LEVEL_BOX_SIZE);
-//        shapeRenderer.rect(LEVEL5_X, LEVEL5_Y, LEVEL_BOX_SIZE, LEVEL_BOX_SIZE);
-//        shapeRenderer.rect(LEVEL6_X, LEVEL6_Y, LEVEL_BOX_SIZE, LEVEL_BOX_SIZE);
-//        shapeRenderer.rect(LEVEL7_X, LEVEL7_Y, LEVEL_BOX_SIZE, LEVEL_BOX_SIZE);
-//        shapeRenderer.rect(LEVEL8_X, LEVEL8_Y, LEVEL_BOX_SIZE, LEVEL_BOX_SIZE);
-//        shapeRenderer.end();
-        game.batch.end();
     }
 
     @Override
@@ -228,6 +212,5 @@ public class MainMenuScreen implements Screen {
 
     @Override
     public void dispose() {
-        this.shapeRenderer.dispose();
     }
 }

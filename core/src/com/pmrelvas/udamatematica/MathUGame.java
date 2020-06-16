@@ -76,4 +76,8 @@ public class MathUGame extends Game {
 		batch.dispose();
 		assets.dispose();
 	}
+
+	public void levelCompleted() {
+		levelAvailable.set(++currentLevel, true);
+	}
 }

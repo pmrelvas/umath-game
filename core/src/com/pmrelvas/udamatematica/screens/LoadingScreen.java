@@ -39,6 +39,7 @@ public class LoadingScreen implements Screen {
         game.assets.load("lvl7.png", Texture.class);
         game.assets.load("lvl8.png", Texture.class);
         game.assets.load("lvlBlocked.png", Texture.class);
+        game.assets.load("return.png", Texture.class);
     }
 
     @Override
