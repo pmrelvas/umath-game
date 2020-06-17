@@ -1,6 +1,7 @@
 package com.pmrelvas.udamatematica.sprites;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -19,12 +20,20 @@ public class ResultBox extends InteractiveTileObject {
     private final Hud hud;
     private final Calculations calculations;
 
+    private Sound hitSound, missSound;
+
     public ResultBox(World world, TiledMap map, Rectangle bounds, Hud hud) {
         super(world, map, bounds);
         fixture.setUserData(this);
         setCategoryFilter(MathUGame.RESULT_BOX_BIT);
         this.hud = hud;
         this.calculations = Calculations.getInstance();
+        initSounds();
+    }
+
+    private void initSounds() {
+        hitSound = Gdx.audio.newSound(Gdx.files.internal("sound/hitSound.ogg"));
+        missSound = Gdx.audio.newSound(Gdx.files.internal("sound/missSound.ogg"));
     }
 
     @Override
@@ -32,9 +41,10 @@ public class ResultBox extends InteractiveTileObject {
         Gdx.app.log("Result Box", "Collision");
         int position = getResultBoxIdxFromCellPosition(getCellPosition());
         if (position == calculations.getResultIdx()) {
+            hitSound.play();
             hud.drawWriteAnswer();
         } else {
-            // TODO: tenta outra vez
+            missSound.play();
         }
     }
 
