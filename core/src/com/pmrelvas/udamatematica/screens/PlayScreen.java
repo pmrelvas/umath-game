@@ -10,7 +10,6 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -36,7 +35,7 @@ public class PlayScreen implements Screen {
     private OrthogonalTiledMapRenderer renderer;
 
     private World world;
-    private Box2DDebugRenderer b2dr;
+    //private Box2DDebugRenderer b2dr;
     private Hero hero;
 
     public PlayScreen(MathUGame game) {
@@ -45,14 +44,16 @@ public class PlayScreen implements Screen {
         gameCam = new OrthographicCamera();
         gamePort = new FitViewport(MathUGame.V_WIDTH/MathUGame.PPM, MathUGame.V_HEIGHT/MathUGame.PPM, gameCam);
         hud = new Hud(game.batch, game);
-
         mapLoader = new TmxMapLoader();
+    }
+
+    private void createWorld() {
         map = mapLoader.load("math_scenario.tmx");
-        renderer = new OrthogonalTiledMapRenderer(map, 1/MathUGame.PPM);
+        renderer = new OrthogonalTiledMapRenderer(map, 1/ MathUGame.PPM);
         gameCam.position.set(gamePort.getWorldWidth()/2, gamePort.getWorldHeight()/2, 0);
 
         world = new World(new Vector2(0, -10), true);
-        b2dr = new Box2DDebugRenderer();
+        //b2dr = new Box2DDebugRenderer();
 
         new B2WorldCreator(world, map, hud);
 
@@ -67,7 +68,9 @@ public class PlayScreen implements Screen {
 
     @Override
     public void show() {
+        createWorld();
         game.levelEnded = false;
+        hud.resetGame();
         hud.setCurrentLevelLabel(game.getCurrentLevel());
     }
 
@@ -107,7 +110,7 @@ public class PlayScreen implements Screen {
             renderer.render();
 
             // render our Box2DDebugLines
-            b2dr.render(world, gameCam.combined);
+            //b2dr.render(world, gameCam.combined);
 
             game.batch.setProjectionMatrix(gameCam.combined);
             game.batch.begin();
@@ -145,7 +148,7 @@ public class PlayScreen implements Screen {
         map.dispose();
         renderer.dispose();
         world.dispose();
-        b2dr.dispose();
+        //b2dr.dispose();
         hud.dispose();
     }
 }

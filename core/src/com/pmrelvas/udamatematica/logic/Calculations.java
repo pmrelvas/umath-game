@@ -11,13 +11,14 @@ public class Calculations {
     private static Calculations instance;
 
     private final int RESULT_LIST_SIZE = 4;
-    private final int SUM_BOUND = 10;
+    private final int SUM_BOUND = 15;
 
     private List<Integer> results;
     private Integer operandA;
     private Integer operandB;
     private Operator operator;
     private int resultIdx;
+    private int expectedResult;
 
     private Calculations() {
         results = Arrays.asList(new Integer[RESULT_LIST_SIZE]);
@@ -35,13 +36,15 @@ public class Calculations {
         return resultIdx;
     }
 
-    public void buildGameResults() {
+    public void buildGameResults(Operator operator) {
         Random random = new Random();
-        operandA = random.nextInt(SUM_BOUND);
-        operandB = random.nextInt(SUM_BOUND);
-        operator = Operator.SUM;
-        resultIdx = random.nextInt(RESULT_LIST_SIZE);
-        int expectedResult = operandA + operandB;
+        this.operator = operator;
+        do {
+            operandA = random.nextInt(SUM_BOUND);
+            operandB = random.nextInt(SUM_BOUND);
+            resultIdx = random.nextInt(RESULT_LIST_SIZE);
+            expectedResult = performOperation(operandA, operandB);
+        } while (expectedResult <= 0);
 
         results = Arrays.asList(new Integer[RESULT_LIST_SIZE]);
         for (int i = 0; i < RESULT_LIST_SIZE; i++) {
@@ -50,8 +53,8 @@ public class Calculations {
                 result = expectedResult;
             } else {
                 do {
-                    result = random.nextInt(SUM_BOUND) + random.nextInt(SUM_BOUND);
-                } while (results.contains(result));
+                    result = performOperation(random.nextInt(SUM_BOUND), random.nextInt(SUM_BOUND));
+                } while (results.contains(result) || result <= 0);
             }
             results.set(i, result);
         }
@@ -61,6 +64,20 @@ public class Calculations {
         Gdx.app.log("operandB", operandB.toString());
         Gdx.app.log("resultIdx", String.valueOf(resultIdx));
         Gdx.app.log("results", results.toString());
+    }
+
+    private int performOperation(Integer operandA, Integer operandB) {
+        switch (operator) {
+            case SUBTRACTION:
+                return operandA - operandB;
+            case MULTIPLICATION:
+                return operandA * operandB;
+            case DIVISION:
+                return operandA / operandB;
+            case SUM:
+            default:
+                return operandA + operandB;
+        }
     }
 
     public List<Integer> getResults() {

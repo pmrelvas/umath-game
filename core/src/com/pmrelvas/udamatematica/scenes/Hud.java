@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Align;
@@ -14,6 +13,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.pmrelvas.udamatematica.MathUGame;
 import com.pmrelvas.udamatematica.logic.Calculations;
+import com.pmrelvas.udamatematica.logic.Operator;
 
 import static com.pmrelvas.udamatematica.MathUGame.TILE_SIZE_PX;
 
@@ -48,8 +48,6 @@ public class Hud implements Disposable {
     Label lblAnswerC;
     Label lblAnswerD;
 
-    private Image imgGray, imgYouWin;
-
     public Hud(SpriteBatch sb, MathUGame game) {
         this.game = game;
         worldTimer = 300;
@@ -60,12 +58,15 @@ public class Hud implements Disposable {
         stage = new Stage(viewport, sb);
 
         calculations = Calculations.getInstance();
+    }
+
+    public void resetGame() {
+        stage.clear();
         generateGameResults();
 
         initTopRowLabel();
         initAnswerLabels();
         setResultsLabels();
-
     }
 
     private void initTopRowLabel() {
@@ -130,7 +131,8 @@ public class Hud implements Disposable {
     }
 
     private void generateGameResults() {
-        calculations.buildGameResults();
+        Operator operator = game.getCurrentLevel() % 2 == 0 ? Operator.SUM : Operator.SUBTRACTION;
+        calculations.buildGameResults(operator);
     }
 
     private void setResultsLabels() {
