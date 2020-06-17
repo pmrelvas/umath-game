@@ -49,6 +49,8 @@ public class MainMenuScreen implements Screen {
     private Label lblTitle;
 
     private ImageButton btnLevel1, btnLevel2, btnLevel3 ,btnLevel4 ,btnLevel5 ,btnLevel6, btnLevel7, btnLevel8;
+    private ImageButton btnHelp;
+    private ImageButton btnAbout;
 
     public MainMenuScreen(MathUGame game) {
         this.game = game;
@@ -162,6 +164,26 @@ public class MainMenuScreen implements Screen {
             }
         });
 
+        btnAbout = new ImageButton(new TextureRegionDrawable(new TextureRegion(game.assets.get("about.png", Texture.class))));
+        btnAbout.setPosition(MathUGame.V_WIDTH - 50, 10);
+        btnAbout.setSize(25, 25);
+        btnAbout.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                game.setScreen(game.aboutScreen);
+            }
+        });
+
+        btnHelp = new ImageButton(new TextureRegionDrawable(new TextureRegion(game.assets.get("help.png", Texture.class))));
+        btnHelp.setPosition(MathUGame.V_WIDTH - 75, 10);
+        btnHelp.setSize(25, 25);
+        btnHelp.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                game.setScreen(game.helpScreen);
+            }
+        });
+
         stage.addActor(btnLevel1);
         stage.addActor(btnLevel2);
         stage.addActor(btnLevel3);
@@ -170,6 +192,8 @@ public class MainMenuScreen implements Screen {
         stage.addActor(btnLevel6);
         stage.addActor(btnLevel7);
         stage.addActor(btnLevel8);
+        stage.addActor(btnAbout);
+        stage.addActor(btnHelp);
     }
 
     @Override

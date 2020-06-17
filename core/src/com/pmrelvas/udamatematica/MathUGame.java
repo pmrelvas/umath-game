@@ -3,10 +3,7 @@ package com.pmrelvas.udamatematica;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.pmrelvas.udamatematica.screens.LoadingScreen;
-import com.pmrelvas.udamatematica.screens.MainMenuScreen;
-import com.pmrelvas.udamatematica.screens.PlayScreen;
-import com.pmrelvas.udamatematica.screens.RightScreen;
+import com.pmrelvas.udamatematica.screens.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -39,6 +36,8 @@ public class MathUGame extends Game {
 	public MainMenuScreen mainMenuScreen;
 	public PlayScreen playScreen;
 	public RightScreen rightScreen;
+	public AboutScreen aboutScreen;
+	public HelpScreen helpScreen;
 
 	public SpriteBatch batch;
 	public AssetManager assets;
@@ -63,6 +62,8 @@ public class MathUGame extends Game {
 		mainMenuScreen = new MainMenuScreen(this);
 		playScreen = new PlayScreen(this);
 		rightScreen = new RightScreen(this);
+		aboutScreen = new AboutScreen(this);
+		helpScreen = new HelpScreen(this);
 		setScreen(new LoadingScreen(this));
 	}
 
