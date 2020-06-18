@@ -48,7 +48,7 @@ public class MathUGame extends Game {
 
 	public SpriteBatch batch;
 	public AssetManager assets;
-	public BitmapFont font24Bold, font34, font40Bold;
+	public BitmapFont font24Bold, font24, font34, font40Bold;
 
 	public boolean levelEnded = false;
 
@@ -84,6 +84,11 @@ public class MathUGame extends Game {
 		params.color = Color.BLACK;
 		params.borderWidth = 0;
 		font34 = generator.generateFont(params);
+
+		params.size = 24;
+		params.color = Color.BLACK;
+		params.borderWidth = 0;
+		font24 = generator.generateFont(params);
 
 		params.size = 40;
 		params.color = Color.BLACK;

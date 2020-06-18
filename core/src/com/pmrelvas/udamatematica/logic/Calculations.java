@@ -54,7 +54,7 @@ public class Calculations {
             } else {
                 do {
                     result = performOperation(random.nextInt(SUM_BOUND), random.nextInt(SUM_BOUND));
-                } while (results.contains(result) || result <= 0);
+                } while (result == expectedResult || (result <= 0 && Operator.SUBTRACTION.equals(operator)));
             }
             results.set(i, result);
         }

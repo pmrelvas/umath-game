@@ -21,10 +21,10 @@ import com.pmrelvas.udamatematica.MathUGame;
 public class AboutScreen implements Screen {
 
     private static final String ABOUT_LABEL_TEXT = "Este jogo foi desenvolvido por:\n" +
-            "    - Prof. Carla Gonçalves;\n" +
-            "    - Guilherme Andrade;\n" +
-            "    - Andreia Andrade;\n" +
-            "    - Pedro Relvas;";
+            "    - João Guilherme Andrade (aluno 1A - Gandra)\n" +
+            "    - Prof Carla Gonçalves (titular de turma 1A - Gandra)\n" +
+            "    - Andreia Andrade (encarregada de educação)\n" +
+            "    - Pedro Relvas";
 
     private final MathUGame game;
 
@@ -67,9 +67,9 @@ public class AboutScreen implements Screen {
         lblTitle.setPosition(0, MathUGame.TSV_HEIGHT - 50);
         lblTitle.setAlignment(Align.center);
 
-        lblAbout = new Label(ABOUT_LABEL_TEXT, new Label.LabelStyle(game.font34, Color.BLACK));
+        lblAbout = new Label(ABOUT_LABEL_TEXT, new Label.LabelStyle(game.font24, Color.BLACK));
         lblAbout.setSize(MathUGame.TSV_WIDTH, 100);
-        lblAbout.setPosition(200, MathUGame.TSV_HEIGHT - 240);
+        lblAbout.setPosition(100, MathUGame.TSV_HEIGHT - 240);
         lblAbout.setAlignment(Align.left);
 
         stage.addActor(lblTitle);
