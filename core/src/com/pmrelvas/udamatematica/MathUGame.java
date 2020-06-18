@@ -42,6 +42,7 @@ public class MathUGame extends Game {
 	public MainMenuScreen mainMenuScreen;
 	public PlayScreen playScreen;
 	public RightScreen rightScreen;
+	public TimeoutScreen timeoutScreen;
 	public AboutScreen aboutScreen;
 	public HelpScreen helpScreen;
 
@@ -94,6 +95,7 @@ public class MathUGame extends Game {
 		mainMenuScreen = new MainMenuScreen(this);
 		playScreen = new PlayScreen(this);
 		rightScreen = new RightScreen(this);
+		timeoutScreen = new TimeoutScreen(this);
 		aboutScreen = new AboutScreen(this);
 		helpScreen = new HelpScreen(this);
 		setScreen(new LoadingScreen(this));

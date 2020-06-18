@@ -30,6 +30,8 @@ public class LoadingScreen implements Screen {
 
     private void loadAssets() {
         game.assets.load("certo.png", Texture.class);
+        game.assets.load("exit.png", Texture.class);
+        game.assets.load("exit-white.png", Texture.class);
         game.assets.load("lvl1.png", Texture.class);
         game.assets.load("lvl2.png", Texture.class);
         game.assets.load("lvl3.png", Texture.class);

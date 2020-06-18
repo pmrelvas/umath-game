@@ -48,6 +48,7 @@ public class MainMenuScreen implements Screen {
     private Label lblTitle;
 
     private ImageButton btnLevel1, btnLevel2, btnLevel3 ,btnLevel4 ,btnLevel5 ,btnLevel6, btnLevel7, btnLevel8;
+    private ImageButton btnExit;
     private ImageButton btnHelp;
     private ImageButton btnAbout;
 
@@ -183,6 +184,16 @@ public class MainMenuScreen implements Screen {
             }
         });
 
+        btnExit = new ImageButton(new TextureRegionDrawable(new TextureRegion(game.assets.get("exit.png", Texture.class))));
+        btnExit.setPosition(25, 10);
+        btnExit.setSize(30, 30);
+        btnExit.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                Gdx.app.exit();
+            }
+        });
+
         stage.addActor(btnLevel1);
         stage.addActor(btnLevel2);
         stage.addActor(btnLevel3);
@@ -193,6 +204,7 @@ public class MainMenuScreen implements Screen {
         stage.addActor(btnLevel8);
         stage.addActor(btnAbout);
         stage.addActor(btnHelp);
+        stage.addActor(btnExit);
     }
 
     @Override

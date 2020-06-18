@@ -26,6 +26,7 @@ public class Hud implements Disposable {
     private final int RESULT_LABEL_D_X_OFFSET = 336;
     private final float RESULT_LABEL_SCALE = 0.8f;
     public static final int NUM_RESULTS = 4;
+    private static final int WORLD_TIMER_DEFAULT_VALUE = 300;
 
     private final MathUGame game;
     public Stage stage;
@@ -33,7 +34,6 @@ public class Hud implements Disposable {
 
     private Integer worldTimer;
     private float timeCount;
-    private static Integer score;
     private Calculations calculations;
 
     Label lblCountdown;
@@ -50,9 +50,8 @@ public class Hud implements Disposable {
 
     public Hud(SpriteBatch sb, MathUGame game) {
         this.game = game;
-        worldTimer = 300;
+        worldTimer = WORLD_TIMER_DEFAULT_VALUE;
         timeCount = 0;
-        score = 0;
 
         viewport = new FitViewport(MathUGame.V_WIDTH, MathUGame.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, sb);
@@ -62,6 +61,8 @@ public class Hud implements Disposable {
 
     public void resetGame() {
         stage.clear();
+        worldTimer = WORLD_TIMER_DEFAULT_VALUE;
+        timeCount = 0;
         generateGameResults();
 
         initTopRowLabel();
@@ -127,6 +128,9 @@ public class Hud implements Disposable {
             worldTimer --;
             lblCountdown.setText(String.format("%03d", worldTimer));
             timeCount = 0;
+        }
+        if (worldTimer == 0) {
+            game.setScreen(game.timeoutScreen);
         }
     }
 
