@@ -1,8 +1,12 @@
 package com.pmrelvas.udamatematica;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.pmrelvas.udamatematica.screens.*;
 
 import java.util.Arrays;
@@ -12,6 +16,8 @@ public class MathUGame extends Game {
 
 	public static final int V_WIDTH = 400;
 	public static final int V_HEIGHT = 208;
+	public static final int TSV_WIDTH = 800;
+	public static final int TSV_HEIGHT = 416;
 	public static final float PPM = 100;
 	public static final int TILE_SIZE_PX = 16;
 
@@ -41,6 +47,7 @@ public class MathUGame extends Game {
 
 	public SpriteBatch batch;
 	public AssetManager assets;
+	public BitmapFont font24Bold, font34, font40Bold;
 
 	public boolean levelEnded = false;
 
@@ -59,6 +66,31 @@ public class MathUGame extends Game {
 		batch = new SpriteBatch();
 		assets = new AssetManager();
 
+		initFonts();
+		initScreens();
+	}
+
+	private void initFonts() {
+		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/Arcon.ttf"));
+		FreeTypeFontGenerator.FreeTypeFontParameter params = new FreeTypeFontGenerator.FreeTypeFontParameter();
+
+		params.size = 24;
+		params.color = Color.BLACK;
+		params.borderWidth = 1;
+		font24Bold = generator.generateFont(params);
+
+		params.size = 34;
+		params.color = Color.BLACK;
+		params.borderWidth = 0;
+		font34 = generator.generateFont(params);
+
+		params.size = 40;
+		params.color = Color.BLACK;
+		params.borderWidth = 1;
+		font40Bold = generator.generateFont(params);
+	}
+
+	private void initScreens() {
 		mainMenuScreen = new MainMenuScreen(this);
 		playScreen = new PlayScreen(this);
 		rightScreen = new RightScreen(this);
@@ -66,6 +98,7 @@ public class MathUGame extends Game {
 		helpScreen = new HelpScreen(this);
 		setScreen(new LoadingScreen(this));
 	}
+
 
 	@Override
 	public void render () {

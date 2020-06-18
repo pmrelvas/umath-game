@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -59,7 +58,7 @@ public class MainMenuScreen implements Screen {
     }
 
     private void initLabels() {
-        lblTitle = new Label("U da Matemática", new Label.LabelStyle(new BitmapFont(), Color.BLACK));
+        lblTitle = new Label("U da Matemática", new Label.LabelStyle(game.font24Bold, Color.BLACK));
         lblTitle.setSize(MathUGame.V_WIDTH, 20);
         lblTitle.setPosition(0, MathUGame.V_HEIGHT - 20);
         lblTitle.setAlignment(Align.center);

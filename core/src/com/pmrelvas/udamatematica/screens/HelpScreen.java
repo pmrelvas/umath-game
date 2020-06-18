@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -38,7 +37,7 @@ public class HelpScreen implements Screen {
 
     public HelpScreen(MathUGame game) {
         this.game = game;
-        viewport = new FitViewport(MathUGame.V_WIDTH, MathUGame.V_HEIGHT, new OrthographicCamera());
+        viewport = new FitViewport(MathUGame.TSV_WIDTH, MathUGame.TSV_HEIGHT, new OrthographicCamera());
         this.stage = new Stage(viewport);
     }
 
@@ -52,8 +51,8 @@ public class HelpScreen implements Screen {
 
     private void initReturnButton() {
         btnReturn = new ImageButton(new TextureRegionDrawable(new TextureRegion(game.assets.get("return-dark.png", Texture.class))));
-        btnReturn.setPosition(MathUGame.V_WIDTH - 50, 10);
-        btnReturn.setSize(25, 25);
+        btnReturn.setPosition(MathUGame.TSV_WIDTH - 75, 20);
+        btnReturn.setSize(50, 50);
         btnReturn.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -64,14 +63,14 @@ public class HelpScreen implements Screen {
     }
 
     private void initLabels() {
-        lblTitle = new Label("Ajuda", new Label.LabelStyle(new BitmapFont(), Color.BLACK));
-        lblTitle.setSize(MathUGame.V_WIDTH, 20);
-        lblTitle.setPosition(0, MathUGame.V_HEIGHT - 20);
+        lblTitle = new Label("Ajuda", new Label.LabelStyle(game.font40Bold, Color.BLACK));
+        lblTitle.setSize(MathUGame.TSV_WIDTH, 20);
+        lblTitle.setPosition(0, MathUGame.TSV_HEIGHT - 50);
         lblTitle.setAlignment(Align.center);
 
-        lblHelp = new Label(HELP_LABEL_TEXT, new Label.LabelStyle(new BitmapFont(), Color.BLACK));
-        lblHelp.setSize(MathUGame.V_WIDTH, 100);
-        lblHelp.setPosition(40, MathUGame.V_HEIGHT - 140);
+        lblHelp = new Label(HELP_LABEL_TEXT, new Label.LabelStyle(game.font34, Color.BLACK));
+        lblHelp.setSize(MathUGame.TSV_WIDTH, 100);
+        lblHelp.setPosition(40, MathUGame.TSV_HEIGHT - 280);
         lblHelp.setAlignment(Align.left);
 
         stage.addActor(lblTitle);
