@@ -10,7 +10,7 @@ public class DesktopLauncher {
 		config.title = "U da Matemática";
 		config.width = MathUGame.V_WIDTH;
 		config.height = MathUGame.V_HEIGHT;
-		config.fullscreen = true;
+		config.fullscreen = false;
 
 		new LwjglApplication(new MathUGame(), config);
 	}
